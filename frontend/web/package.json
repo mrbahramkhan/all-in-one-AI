@@ -1,5 +1,5 @@
 {
-  "name": "@ai-os/web",
+  "name": "all-in-one-ai-web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-os/types": "workspace:*",
     "next": "^14.2.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
@@ -47,8 +46,11 @@
   "devDependencies": {
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
+    "@types/node": "^20.0.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^14.2.0"
   }
 }
