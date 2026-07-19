@@ -1,0 +1,9 @@
+{
+  "name": "all-in-one-ai-deploy-bot",
+  "version": "1.0.0",
+  "description": "Auto-deploy bot for All-In-One AI",
+  "scripts": {
+    "deploy": "node deploy-bot.js"
+  },
+  "engines": { "node": ">=18.0.0" }
+}
