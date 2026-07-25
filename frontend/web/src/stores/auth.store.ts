@@ -1,35 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { User } from '@ai-os/types';
-
-interface AuthState {
-  user: User | null;
-  accessToken: string | null;
-  isLoading: boolean;
-  setUser: (user: User | null) => void;
-  setAccessToken: (token: string | null) => void;
-  setLoading: (loading: boolean) => void;
-  logout: () => void;
-}
-
-export const useAuthStore = create<AuthState>()(
-  persist(
-    (set) => ({
-      user: null,
-      accessToken: null,
-      isLoading: false,
-      setUser: (user) => set({ user }),
-      setAccessToken: (token) => {
-        if (token) localStorage.setItem('access_token', token);
-        else localStorage.removeItem('access_token');
-        set({ accessToken: token });
-      },
-      setLoading: (isLoading) => set({ isLoading }),
-      logout: () => {
-        localStorage.removeItem('access_token');
-        set({ user: null, accessToken: null });
-      },
-    }),
-    { name: 'auth-store', partialize: (s) => ({ user: s.user, accessToken: s.accessToken }) }
-  )
-);
+export interface User { id: string; email: string; name: string; avatarUrl?: string; role: string; plan: string; credits: number; monthlySpend: number; emailVerified: boolean; mfaEnabled: boolean; }
+interface AuthState { user: User | null; accessToken: string | null; refreshToken: string | null; isLoading: boolean; setUser: (u: User | null) => void; setTokens: (a: string, r: string) => void; setLoading: (l: boolean) => void; logout: () => void; }
+export const useAuthStore = create<AuthState>()(persist((set) => ({
+  user: null, accessToken: null, refreshToken: null, isLoading: false,
+  setUser: (user) => set({ user }),
+  setTokens: (accessToken, refreshToken) => { if (typeof window !== 'undefined') { localStorage.setItem('access_token', accessToken); localStorage.setItem('refresh_token', refreshToken); } set({ accessToken, refreshToken }); },
+  setLoading: (isLoading) => set({ isLoading }),
+  logout: () => { if (typeof window !== 'undefined') { localStorage.removeItem('access_token'); localStorage.removeItem('refresh_token'); } set({ user: null, accessToken: null, refreshToken: null }); },
+}), { name: 'auth-store', partialize: (s) => ({ user: s.user, accessToken: s.accessToken, refreshToken: s.refreshToken }) }));
