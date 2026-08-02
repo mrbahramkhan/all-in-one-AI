@@ -2,13 +2,6 @@
 import { useState, useEffect } from 'react';
 import { adminApi } from '@/lib/api';
 
-const ICONS = {
-  users: '👥',
-  paid: '💳',
-  requests: '⚡',
-  revenue: '💰',
-};
-
 interface AnalyticsData {
   totalUsers: number;
   paidUsers: number;
@@ -26,10 +19,10 @@ export default function AdminPage() {
   }, []);
 
   const statItems = analytics ? [
-    { label: 'Users', value: analytics.totalUsers, icon: ICONS.users, color: 'text-blue-500' },
-    { label: 'Paid', value: analytics.paidUsers, icon: ICONS.paid, color: 'text-green-500' },
-    { label: 'Requests', value: analytics.totalRequests, icon: ICONS.requests, color: 'text-violet-500' },
-    { label: 'Revenue', value: '$' + Number(analytics.totalRevenue || 0).toFixed(2), icon: ICONS.revenue, color: 'text-orange-500' },
+    { label: 'Users', value: analytics.totalUsers, icon: '[Users]', color: 'text-blue-500' },
+    { label: 'Paid', value: analytics.paidUsers, icon: '[Paid]', color: 'text-green-500' },
+    { label: 'Requests', value: analytics.totalRequests, icon: '[Requests]', color: 'text-violet-500' },
+    { label: 'Revenue', value: '$' + Number(analytics.totalRevenue || 0).toFixed(2), icon: '[Revenue]', color: 'text-orange-500' },
   ] : [];
 
   return (
@@ -40,7 +33,7 @@ export default function AdminPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {statItems.map((stat) => (
             <div key={stat.label} className="p-4 rounded-xl border border-border bg-card">
-              <div className={`text-2xl ${stat.color}`}>{stat.icon}</div>
+              <div className={`text-lg font-semibold ${stat.color}`}>{stat.icon}</div>
               <div className="text-xl font-bold mt-2">{stat.value}</div>
               <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
             </div>
@@ -62,7 +55,7 @@ export default function AdminPage() {
           <tbody className="divide-y divide-border">
             {users.map((user: any) => (
               <tr key={user.id} className="hover:bg-muted/30">
-                <td className="px-4 py-3 font-medium">{user.name || '—'}</td>
+                <td className="px-4 py-3 font-medium">{user.name || '�'}</td>
                 <td className="px-4 py-3 text-muted-foreground">{user.email}</td>
                 <td className="px-4 py-3 capitalize">{user.plan}</td>
                 <td className="px-4 py-3">{Number(user.credits || 0).toLocaleString()}</td>

@@ -2,30 +2,33 @@
 import { useAuthStore } from '@/stores/auth.store';
 import Link from 'next/link';
 
-const ICONS = {
-  chat: '💬',
-  bot: '🤖',
-  workflow: '⚡',
-  studio: '🎨',
-  tokens: '⚡',
-  cost: '💰',
-  chats: '💬',
-  agents: '🤖',
-};
-
 const QUICK = [
-  { href: '/chat', icon: ICONS.chat, label: 'New Chat', desc: 'Start AI conversation' },
-  { href: '/agents', icon: ICONS.bot, label: 'Agents', desc: 'Build AI agents' },
-  { href: '/workflows', icon: ICONS.workflow, label: 'Workflows', desc: 'Automate tasks' },
-  { href: '/studio', icon: ICONS.studio, label: 'Studio', desc: 'Generate content' },
+  { href: '/chat', icon: 'chat', label: 'New Chat', desc: 'Start AI conversation' },
+  { href: '/agents', icon: 'bot', label: 'Agents', desc: 'Build AI agents' },
+  { href: '/workflows', icon: 'workflow', label: 'Workflows', desc: 'Automate tasks' },
+  { href: '/studio', icon: 'studio', label: 'Studio', desc: 'Generate content' },
 ];
 
 const STATS = [
-  { label: 'Tokens', value: '2.4M', icon: ICONS.tokens, c: 'text-violet-500' },
-  { label: 'Cost', value: '$12.40', icon: ICONS.cost, c: 'text-green-500' },
-  { label: 'Chats', value: '142', icon: ICONS.chats, c: 'text-blue-500' },
-  { label: 'Agents', value: '8', icon: ICONS.agents, c: 'text-orange-500' },
+  { label: 'Tokens', value: '2.4M', icon: 'tokens', c: 'text-violet-500' },
+  { label: 'Cost', value: '$12.40', icon: 'cost', c: 'text-green-500' },
+  { label: 'Chats', value: '142', icon: 'chats', c: 'text-blue-500' },
+  { label: 'Agents', value: '8', icon: 'agents', c: 'text-orange-500' },
 ];
+
+const getIconLabel = (icon: string) => {
+  const icons: Record<string, string> = {
+    chat: 'Chat',
+    bot: 'Bot',
+    workflow: 'Flow',
+    studio: 'Studio',
+    tokens: 'Tokens',
+    cost: 'Cost',
+    chats: 'Chats',
+    agents: 'Agents',
+  };
+  return icons[icon] || icon;
+};
 
 export default function DashboardPage() {
   const { user } = useAuthStore();
@@ -39,12 +42,14 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {STATS.map((s) => (
-          <div key={s.label} className="p-4 rounded-xl border border-border bg-card">
-            <div className={`text-2xl font-bold ${s.c}`}>{s.icon}</div>
-            <div className="text-xl font-bold mt-2">{s.value}</div>
-            <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
+        {STATS.map((stat) => (
+          <div key={stat.label} className="bg-card p-4 rounded-lg border">
+            <p className="text-muted-foreground text-xs">{stat.label}</p>
+            <p className="text-lg font-bold mt-1">{stat.value}</p>
+            <p className={`text-xs mt-1 ${stat.c}`}>{getIconLabel(stat.icon)}</p>
           </div>
+        ))}
+      </div>
         ))}
       </div>
 
@@ -59,7 +64,7 @@ export default function DashboardPage() {
               href={a.href}
               className="p-4 rounded-xl border border-border bg-card hover:bg-accent transition-colors group"
             >
-              <div className="text-2xl mb-2">{a.icon}</div>
+              <div className="text-lg mb-2 font-semibold text-violet-500">[{getIconLabel(a.icon)}]</div>
               <div className="font-medium text-sm group-hover:text-violet-500 transition-colors">
                 {a.label}
               </div>
