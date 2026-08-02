@@ -26,12 +26,24 @@ export default function Home() {
       </nav>
 
       <section className="max-w-7xl mx-auto px-6 pt-24 pb-16 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-xs font-medium mb-8">✨ 15+ AI models — GPT-4o, Claude, Gemini, Grok & more</div>
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">One Platform.<br/><span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Every AI.</span><br/>Zero Compromise.</h1>
-        <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10">Stop switching between 10+ AI tools. Access ChatGPT, Claude, Gemini and more from a single dashboard.</p>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-xs font-medium mb-8">
+          ✨ 15+ AI models — GPT-4o, Claude, Gemini, Grok & more
+        </div>
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          One Platform.<br />
+          <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Every AI.</span><br />
+          Zero Compromise.
+        </h1>
+        <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10">
+          Stop switching between 10+ AI tools. Access ChatGPT, Claude, Gemini and more from a single dashboard.
+        </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button onClick={() => { window.location.href = '/register'; }} className="px-8 py-4 bg-gradient-to-r from-violet-600 to-cyan-600 rounded-xl font-semibold text-lg hover:opacity-90">Start for Free</button>
-          <button onClick={() => { window.location.href = '/login'; }} className="px-8 py-4 border border-white/20 rounded-xl font-semibold text-lg hover:bg-white/5">Sign In →</button>
+          <a href="/register" className="px-8 py-4 bg-gradient-to-r from-violet-600 to-cyan-600 rounded-xl font-semibold text-lg hover:opacity-90 inline-block text-center">
+            Start for Free
+          </a>
+          <a href="/login" className="px-8 py-4 border border-white/20 rounded-xl font-semibold text-lg hover:bg-white/5 inline-block text-center">
+            Sign In →
+          </a>
         </div>
         <p className="text-sm text-white/40 mt-4">50,000 free tokens • No credit card required</p>
       </section>
@@ -48,7 +60,9 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 py-8 text-center text-white/40 text-sm">© 2026 All-In-One AI — Built for the AI-first generation</footer>
+      <footer className="border-t border-white/10 py-8 text-center text-white/40 text-sm">
+        © 2026 All-In-One AI — Built for the AI-first generation
+      </footer>
     </div>
   );
 }
