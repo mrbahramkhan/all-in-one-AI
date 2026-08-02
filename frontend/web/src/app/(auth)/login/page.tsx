@@ -12,13 +12,24 @@ export default function LoginPage() {
   const { setUser, setTokens } = useAuthStore();
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); setLoading(true); setError('');
+    e.preventDefault();
+    setLoading(true);
+    setError('');
     try {
-      const { data } = await authApi.login({ email, password });
-      setTokens(data.data.accessToken, data.data.refreshToken);
-      setUser(data.data.user);
-      router.push('/chat');
-    } catch (err: any) { setError(err.response?.data?.error?.message ?? 'Login failed'); }
+      const response = await authApi.login({ email, password });
+      // Response from backend: { success: true, data: { user, accessToken, refreshToken } }
+      // Axios wraps this as response.data
+      const responseData = response.data?.data;
+      if (responseData && responseData.accessToken && responseData.user) {
+        setTokens(responseData.accessToken, responseData.refreshToken);
+        setUser(responseData.user);
+        router.push('/chat');
+      } else {
+        setError('Invalid response from server');
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.error?.message ?? 'Login failed');
+    }
     setLoading(false);
   };
   return (

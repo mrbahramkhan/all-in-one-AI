@@ -1,6 +1,13 @@
 import axios from 'axios';
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-export const api = axios.create({ baseURL: API_URL + '/api/v1', withCredentials: true });
+
+// In client-side code, use the Next.js proxy
+// In server-side code, use the direct backend URL
+const API_URL = '/api/proxy/api/v1';
+
+export const api = axios.create({ 
+  baseURL: API_URL, 
+  withCredentials: true 
+});
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') { const t = localStorage.getItem('access_token'); if (t) config.headers.Authorization = 'Bearer ' + t; }
   return config;
