@@ -1,15 +1,25 @@
 'use client';
 
 const FEATURES = [
-  { icon: '💬', title: 'Universal AI Chat', desc: 'GPT-4o, Claude, Gemini + 10 more models from one interface' },
-  { icon: '⚡', title: 'AI Router', desc: 'Auto-selects best model for your task' },
-  { icon: '🤖', title: 'Agent Builder', desc: 'Build custom AI agents with memory and tools' },
-  { icon: '📚', title: 'Knowledge Base', desc: 'RAG-powered document Q&A with citations' },
-  { icon: '⚡', title: 'Workflow Automation', desc: 'Zapier-like AI automation builder' },
-  { icon: '🎨', title: 'Content Studio', desc: 'Generate text, images, videos, and voiceovers' },
-  { icon: '💻', title: 'AI Code Workspace', desc: 'AI-powered code editor with deployment tools' },
-  { icon: '🛒', title: 'Marketplace', desc: 'Buy/sell AI agents. Earn 70% revenue share' }
+  { icon: 'chat', title: 'Universal AI Chat', desc: 'GPT-4o, Claude, Gemini + 10 more models from one interface' },
+  { icon: 'bolt', title: 'AI Router', desc: 'Auto-selects best model for your task' },
+  { icon: 'robot', title: 'Agent Builder', desc: 'Build custom AI agents with memory and tools' },
+  { icon: 'book', title: 'Knowledge Base', desc: 'RAG-powered document Q&A with citations' },
+  { icon: 'bolt', title: 'Workflow Automation', desc: 'Zapier-like AI automation builder' },
+  { icon: 'palette', title: 'Content Studio', desc: 'Generate text, images, videos, and voiceovers' },
+  { icon: 'code', title: 'AI Code Workspace', desc: 'AI-powered code editor with deployment tools' },
+  { icon: 'store', title: 'Marketplace', desc: 'Buy/sell AI agents. Earn 70% revenue share' }
 ];
+
+const iconMap: { [key: string]: string } = {
+  chat: '💬',
+  bolt: '⚡',
+  robot: '🤖',
+  book: '📚',
+  palette: '🎨',
+  code: '💻',
+  store: '🛒'
+};
 
 export default function Home() {
   return (
@@ -27,7 +37,7 @@ export default function Home() {
 
       <section className="max-w-7xl mx-auto px-6 pt-24 pb-16 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-xs font-medium mb-8">
-          ✨ 15+ AI models — GPT-4o, Claude, Gemini, Grok & more
+          15+ AI models - GPT-4o, Claude, Gemini, Grok and more
         </div>
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
           One Platform.<br />
@@ -42,17 +52,17 @@ export default function Home() {
             Start for Free
           </a>
           <a href="/login" className="px-8 py-4 border border-white/20 rounded-xl font-semibold text-lg hover:bg-white/5 inline-block text-center">
-            Sign In →
+            Sign In
           </a>
         </div>
-        <p className="text-sm text-white/40 mt-4">50,000 free tokens • No credit card required</p>
+        <p className="text-sm text-white/40 mt-4">50,000 free tokens - No credit card required</p>
       </section>
 
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {FEATURES.map((f) => (
             <div key={f.title} className="p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
-              <div className="text-3xl mb-3">{f.icon}</div>
+              <div className="text-3xl mb-3">{iconMap[f.icon]}</div>
               <h3 className="font-semibold mb-2">{f.title}</h3>
               <p className="text-sm text-white/60">{f.desc}</p>
             </div>
@@ -61,7 +71,7 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-white/10 py-8 text-center text-white/40 text-sm">
-        © 2026 All-In-One AI — Built for the AI-first generation
+        All-In-One AI - Built for the AI-first generation
       </footer>
     </div>
   );
