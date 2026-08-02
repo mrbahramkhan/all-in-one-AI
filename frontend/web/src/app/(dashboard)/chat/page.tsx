@@ -54,7 +54,7 @@ export default function ChatPage() {
   };
 
   const handleNewChat = () => {
-    addConversation();
+    addConversation('New Chat');
   };
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -65,7 +65,6 @@ export default function ChatPage() {
       id: Date.now().toString(),
       role: 'user',
       content: input,
-      timestamp: new Date().toISOString(),
     });
 
     setInput('');
@@ -93,10 +92,10 @@ export default function ChatPage() {
         if (done) break;
 
         const text = new TextDecoder().decode(value);
-        appendStreamChunk(activeConversationId, text);
+        appendStreamChunk(activeConversationId, 'assistant', text);
       }
 
-      clearStream(activeConversationId);
+      clearStream();
     } catch (error) {
       console.error('Chat error:', error);
       setStreaming(false);
