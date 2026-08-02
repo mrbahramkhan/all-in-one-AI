@@ -5,7 +5,14 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build",
+    "health": "curl -s http://localhost:3000/api/health | jq",
+    "test-api": "curl -s http://localhost:3001/api/v1/health | jq",
+    "clean": "rm -rf .next node_modules && npm install",
+    "validate": "npm run type-check && npm run lint"
   },
   "dependencies": {
     "next": "14.2.5",
