@@ -17,11 +17,9 @@ export function DashboardHome() {
           {QUICK.map(a=><Link key={a.href} href={a.href} className="p-4 rounded-xl border border-border bg-card hover:bg-accent transition-colors group"><div className="text-2xl mb-2">{a.icon}</div><div className="font-medium text-sm group-hover:text-violet-500">{a.label}</div><div className="text-xs text-muted-foreground mt-1">{a.desc}</div></Link>)}
         </div>
       </div>
-      <div className="p-4 rounded-xl border border-violet-500/30 bg-violet-500/5">
-        <div className="flex items-center justify-between">
-          <div><div className="text-sm font-semibold capitalize">{user?.plan||'free'} Plan</div><div className="text-xs text-muted-foreground mt-1">{Number(user?.credits||0).toLocaleString()} credits remaining</div></div>
-          {user?.plan==='free'&&<Link href="/settings" className="px-4 py-2 bg-violet-600 hover:bg-violet-700 rounded-lg text-xs font-medium text-white">Upgrade</Link>}
-        </div>
+      <div className="p-4 rounded-xl border border-violet-500/30 bg-violet-500/5 flex items-center justify-between">
+        <div><div className="text-sm font-semibold capitalize">{user?.plan||'free'} Plan</div><div className="text-xs text-muted-foreground mt-1">{Number(user?.credits||0).toLocaleString()} credits</div></div>
+        {user?.plan==='free'&&<Link href="/settings" className="px-4 py-2 bg-violet-600 hover:bg-violet-700 rounded-lg text-xs font-medium text-white">Upgrade</Link>}
       </div>
     </div>
   );
