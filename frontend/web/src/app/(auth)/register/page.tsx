@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/stores/auth.store';
 export default function RegisterPage() {
-  const [form,setForm]=useState({name:'',email:'',password:''});
-  const [loading,setLoading]=useState(false);
-  const [error,setError]=useState('');
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { setUser, setTokens } = useAuthStore();
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
@@ -17,7 +17,7 @@ export default function RegisterPage() {
       setTokens(data.data.accessToken, data.data.refreshToken);
       setUser(data.data.user);
       router.push('/chat');
-    } catch (err: any) { setError(err.response?.data?.error?.message ?? 'Registration failed.'); }
+    } catch (err: any) { setError(err.response?.data?.error?.message ?? 'Registration failed'); }
     setLoading(false);
   };
   return (
@@ -34,15 +34,15 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-sm text-white/70 mb-1.5 block">Full Name</label>
-              <input type="text" value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} required className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" placeholder="John Doe"/>
+              <input type="text" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required placeholder="John Doe" className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" />
             </div>
             <div>
               <label className="text-sm text-white/70 mb-1.5 block">Email</label>
-              <input type="email" value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} required className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" placeholder="you@example.com"/>
+              <input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required placeholder="you@example.com" className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" />
             </div>
             <div>
               <label className="text-sm text-white/70 mb-1.5 block">Password</label>
-              <input type="password" value={form.password} onChange={e=>setForm(f=>({...f,password:e.target.value}))} required minLength={8} className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" placeholder="Min 8 characters"/>
+              <input type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} required minLength={8} placeholder="Min 8 characters" className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" />
             </div>
             <button type="submit" disabled={loading} className="w-full py-3 bg-gradient-to-r from-violet-600 to-cyan-600 hover:opacity-90 text-white rounded-xl font-semibold disabled:opacity-50">
               {loading ? 'Creating...' : 'Create free account'}
