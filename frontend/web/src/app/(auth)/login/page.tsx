@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/stores/auth.store';
 export default function LoginPage() {
-  const [email,setEmail]=useState('');
-  const [password,setPassword]=useState('');
-  const [loading,setLoading]=useState(false);
-  const [error,setError]=useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { setUser, setTokens } = useAuthStore();
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,7 +18,7 @@ export default function LoginPage() {
       setTokens(data.data.accessToken, data.data.refreshToken);
       setUser(data.data.user);
       router.push('/chat');
-    } catch (err: any) { setError(err.response?.data?.error?.message ?? 'Login failed. Check credentials.'); }
+    } catch (err: any) { setError(err.response?.data?.error?.message ?? 'Login failed'); }
     setLoading(false);
   };
   return (
@@ -35,17 +35,17 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-sm text-white/70 mb-1.5 block">Email</label>
-              <input type="email" value={email} onChange={e=>setEmail(e.target.value)} required className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" placeholder="you@example.com"/>
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="you@example.com" className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" />
             </div>
             <div>
               <label className="text-sm text-white/70 mb-1.5 block">Password</label>
-              <input type="password" value={password} onChange={e=>setPassword(e.target.value)} required className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" placeholder="••••••••"/>
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="••••••••" className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-1 focus:ring-violet-500" />
             </div>
-            <button type="submit" disabled={loading} className="w-full py-3 bg-gradient-to-r from-violet-600 to-cyan-600 hover:opacity-90 text-white rounded-xl font-semibold disabled:opacity-50 transition-opacity">
+            <button type="submit" disabled={loading} className="w-full py-3 bg-gradient-to-r from-violet-600 to-cyan-600 hover:opacity-90 text-white rounded-xl font-semibold disabled:opacity-50">
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
-          <div className="mt-4 p-3 rounded-lg bg-white/5 border border-white/10 text-xs text-white/50">
+          <div className="mt-4 p-3 rounded-lg bg-white/5 text-xs text-white/50">
             <p className="font-medium text-white/70 mb-1">Demo accounts:</p>
             <p>demo@allinone.ai / Demo@123456</p>
             <p>admin@allinone.ai / Admin@123456</p>
